@@ -21,6 +21,13 @@ export const articleData = {
       article: "valid-article",
     },
   },
+  successArticle: {
+    body: {
+      id: "valid-id",
+      title: "valid-title",
+      article: "valid-article",
+    },
+  },
   invalidArticle: {
     body: {
       title: "valid-title",

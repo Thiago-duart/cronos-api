@@ -1,5 +1,3 @@
-import { ParamError } from "../errors/params-errors";
-
 export function aricleValidate(data: any) {
   const verify = ["title", "article"];
   for (let key of verify) {
