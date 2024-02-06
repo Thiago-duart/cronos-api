@@ -1,7 +1,7 @@
 import { ArticleController } from "@/controllers/article/article";
 import { articleData } from "../mocks/article-data";
 import { ParamError } from "@/controllers/errors/params-errors";
-import { IValidator } from "@/controllers/protocols/validationData";
+import { IValidator } from "@/controllers/interface/data-validator";
 
 describe("./src/controllers/article", () => {
   interface IMakeSut {

@@ -1,7 +1,7 @@
 import { ParamError } from "../errors/params-errors";
-import { badRequest } from "../helpers/httpResponse";
-import { IControllers, IHttpRequest, IHttpResponse } from "../protocols";
-import { IValidator } from "../protocols/validationData";
+import { badRequest } from "../helpers/http-response";
+import { IControllers, IHttpRequest, IHttpResponse } from "../interface";
+import { IValidator } from "../interface/data-validator";
 
 export class ArticleController implements IControllers {
   private readonly datavalidator: IValidator;
@@ -10,9 +10,11 @@ export class ArticleController implements IControllers {
   }
   async handle(httresquest: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const valid = this.datavalidator.validate(httresquest.body);
-      if (valid) {
-        return badRequest(new ParamError(valid));
+      const isValid: string | null = this.datavalidator.validate(
+        httresquest.body
+      );
+      if (isValid) {
+        return badRequest(new ParamError(isValid));
       }
       return;
     } catch (error) {
