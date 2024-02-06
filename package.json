@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "test:unit": "npm test --silent -- -c jest-unit.config.ts",
     "test:integration": "pnpm test --silent --  -c jest-integration.config.ts",
     "test:verbose": "jest --verbose",
