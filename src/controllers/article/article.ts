@@ -1,16 +1,18 @@
 import { ParamError } from "../errors/params-errors";
+import { badRequest } from "../helpers/httpResponse";
 import { IControllers, IHttpRequest, IHttpResponse } from "../protocols";
-import { aricleValidate } from "../validateData/articleData";
+import { IValidator } from "../protocols/validationData";
 
 export class ArticleController implements IControllers {
+  private readonly datavalidator: IValidator;
+  constructor(datavalidator: IValidator) {
+    this.datavalidator = datavalidator;
+  }
   async handle(httresquest: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const valid = aricleValidate(httresquest.body);
+      const valid = this.datavalidator.validate(httresquest.body);
       if (valid) {
-        return {
-          body: new ParamError(valid),
-          statusCode: 400,
-        };
+        return badRequest(new ParamError(valid));
       }
       return;
     } catch (error) {
