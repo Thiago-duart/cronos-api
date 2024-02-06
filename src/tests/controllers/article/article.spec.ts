@@ -1,11 +1,10 @@
 import { ArticleController } from "@/controllers/article/article";
 import { articleData } from "../mocks/article-data";
-import { IControllers } from "@/controllers/protocols";
 import { ParamError } from "@/controllers/errors/params-errors";
 
 describe("./src/controllers/article", () => {
   interface IMakeSut {
-    article: IControllers;
+    article: ArticleController;
   }
   function makeSut(): IMakeSut {
     const article = new ArticleController();
@@ -25,6 +24,26 @@ describe("./src/controllers/article", () => {
     expect(httpResponse).toEqual({
       body: new ParamError("article not found"),
       statusCode: 400,
+    });
+  });
+  test("should return 200 in case of success", async () => {
+    const { article } = makeSut();
+    jest
+      .spyOn(article, "handle")
+      .mockImplementationOnce(async (httresquest) => {
+        return {
+          statusCode: 200,
+          body: {
+            id: "valid-id",
+            title: "valid-title",
+            article: "valid-article",
+          },
+        };
+      });
+    const httpResponse = await article.handle(articleData.validData);
+    expect(httpResponse).toEqual({
+      body: articleData.successArticle.body,
+      statusCode: 200,
     });
   });
 });
