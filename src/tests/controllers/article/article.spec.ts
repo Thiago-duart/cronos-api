@@ -1,9 +1,10 @@
 import { ArticleController } from "@/controllers/article/article";
-import { articleData } from "../mocks/article-data";
 import { ParamError } from "@/controllers/errors/params-errors";
 import { IValidator } from "@/controllers/interface/data-validator";
 import { IAddArticle } from "@/domain/usecase/add-article";
 import { IArticle } from "@/domain/models/article";
+import { ServerError } from "@/controllers/errors/server-error";
+import { articleData } from "../../mocks/article-data";
 
 describe("./src/controllers/article", () => {
   interface IMakeSut {
@@ -94,5 +95,16 @@ describe("./src/controllers/article", () => {
     const addSpy = jest.spyOn(addArticleStub, "add");
     await article.handle(articleData.validData);
     expect(addSpy).toHaveBeenCalledWith(articleData.validData.body);
+  });
+  test("should return 500 if receive an unexpected error", async () => {
+    const { article, addArticleStub } = makeSut();
+    jest
+      .spyOn(addArticleStub, "add")
+      .mockImplementationOnce(async (article): Promise<any> => {
+        throw new Error();
+      });
+    const response = await article.handle(articleData.validData);
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toEqual(new ServerError("fake"));
   });
 });
