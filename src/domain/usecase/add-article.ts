@@ -1,7 +1,7 @@
 import { IArticle } from "../models/article";
-interface IArticleRequest {
+export interface IArticleRequest {
   title: string;
-  text: string;
+  article: string;
 }
 export interface IAddArticle {
   add(article: IArticleRequest): Promise<IArticle>;

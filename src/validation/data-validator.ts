@@ -11,7 +11,7 @@ export class DataValidator implements IValidator {
 
     for (let key of verify) {
       if (typeof data[key] === "string") {
-        return `${key} shold be string`;
+        return `${key} should be string`;
       }
     }
   }
