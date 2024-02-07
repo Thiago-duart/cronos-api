@@ -1,8 +1,9 @@
 import { IAddArticle } from "@/domain/usecase/add-article";
 import { ParamError } from "../errors/params-errors";
-import { badRequest } from "../helpers/http-response";
+import { badRequest, serverError } from "../helpers/http-response";
 import { IControllers, IHttpRequest, IHttpResponse } from "../interface";
 import { IValidator } from "../interface/data-validator";
+import { ServerError } from "../errors/server-error";
 
 export class ArticleController implements IControllers {
   private readonly datavalidator: IValidator;
@@ -23,7 +24,7 @@ export class ArticleController implements IControllers {
       const response = await this.addArticle.add(httresquest.body);
       return;
     } catch (error) {
-      console.log(error);
+      return serverError(new ServerError(error.stack));
     }
   }
 }
