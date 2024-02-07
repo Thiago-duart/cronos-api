@@ -2,11 +2,14 @@ import { ArticleController } from "@/controllers/article/article";
 import { articleData } from "../mocks/article-data";
 import { ParamError } from "@/controllers/errors/params-errors";
 import { IValidator } from "@/controllers/interface/data-validator";
+import { IAddArticle } from "@/domain/usecase/add-article";
+import { IArticle } from "@/domain/models/article";
 
 describe("./src/controllers/article", () => {
   interface IMakeSut {
     article: ArticleController;
     dataValidatorStub: IValidator;
+    addArticleStub: IAddArticle;
   }
   function makeSut(): IMakeSut {
     class DataValidatorStub implements IValidator {
@@ -14,9 +17,15 @@ describe("./src/controllers/article", () => {
         return;
       }
     }
+    class AddArticleStub implements IAddArticle {
+      add(article: any): Promise<IArticle> {
+        return article.successArticle;
+      }
+    }
+    const addArticleStub = new AddArticleStub();
     const dataValidatorStub = new DataValidatorStub();
-    const article = new ArticleController(dataValidatorStub);
-    return { article, dataValidatorStub };
+    const article = new ArticleController(dataValidatorStub, addArticleStub);
+    return { article, dataValidatorStub, addArticleStub };
   }
   test("should return 400 and an error message = title not found", async () => {
     const { article, dataValidatorStub } = makeSut();
@@ -79,5 +88,11 @@ describe("./src/controllers/article", () => {
       body: new ParamError("article shold be string"),
       statusCode: 400,
     });
+  });
+  test("should call addArticle with corretly data", async () => {
+    const { article, addArticleStub } = makeSut();
+    const addSpy = jest.spyOn(addArticleStub, "add");
+    await article.handle(articleData.validData);
+    expect(addSpy).toHaveBeenCalledWith(articleData.validData.body);
   });
 });
