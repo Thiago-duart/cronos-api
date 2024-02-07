@@ -1,6 +1,6 @@
 import { IAddArticle } from "@/domain/usecase/add-article";
 import { ParamError } from "../errors/params-errors";
-import { badRequest, serverError } from "../helpers/http-response";
+import { badRequest, created, serverError } from "../helpers/http-response";
 import { IControllers, IHttpRequest, IHttpResponse } from "../interface";
 import { IValidator } from "../interface/data-validator";
 import { ServerError } from "../errors/server-error";
@@ -22,7 +22,7 @@ export class ArticleController implements IControllers {
       }
 
       const response = await this.addArticle.add(httresquest.body);
-      return;
+      return created(response);
     } catch (error) {
       return serverError(new ServerError(error.stack));
     }
