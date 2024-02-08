@@ -1,4 +1,4 @@
-import { IAddArticle } from "@/domain/usecase/add-article";
+import { IAddArticle } from "@/domain/usecase/article-usecases";
 import { ParamError } from "../errors/params-errors";
 import { badRequest, created, serverError } from "../helpers/http-response";
 import { IControllers, IHttpRequest, IHttpResponse } from "../interface";

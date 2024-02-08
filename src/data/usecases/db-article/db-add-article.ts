@@ -1,6 +1,9 @@
 import { IArticleRepositore } from "@/data/interface/article-repositore";
 import { IArticle } from "@/domain/models/article";
-import { IAddArticle, IArticleRequest } from "@/domain/usecase/add-article";
+import {
+  IAddArticle,
+  IArticleRequest,
+} from "@/domain/usecase/article-usecases";
 
 export class DbAddArticle implements IAddArticle {
   private readonly articleRepositore: IArticleRepositore;
