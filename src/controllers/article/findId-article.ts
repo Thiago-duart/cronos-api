@@ -11,9 +11,9 @@ export class FindIdArticleController implements IControllers {
   }
   async handle(httresquest?: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const { id } = httresquest?.body;
+      const id = httresquest?.body?.id || false;
       if (!id) {
-        return badRequest(new ParamError("id"));
+        return badRequest(new ParamError("missing: id"));
       }
       const response = await this.findIdArticle.findId(id);
       return ok(response);
