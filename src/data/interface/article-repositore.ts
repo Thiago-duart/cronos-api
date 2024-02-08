@@ -14,6 +14,6 @@ export interface IArticleRepositore {
   add(data: IArticleRequest): Promise<IArticle>;
   get(): Promise<IArticle[]>;
   getId(id: string): Promise<IArticle>;
-  update(data: IUpdateArticle): Promise<IArticle>;
+  update(id: string, data: IUpdateArticle): Promise<IArticle>;
   delete(id: string): Promise<void>;
 }

@@ -42,9 +42,19 @@ export class AddArticleRepositore implements IArticleRepositore {
       article: article.article,
     };
   }
-  async update(data: IUpdateArticle): Promise<IArticle> {
+  async update(id: string, data: IUpdateArticle): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");
-    return;
+    const update = await articleCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: data }
+    );
+    const article = await articleCollection.findOne({ _id: new ObjectId(id) });
+    return {
+      id: article._id.toString(),
+      img: article.img,
+      title: article.title,
+      article: article.article,
+    };
   }
   async delete(id: string): Promise<void> {
     const articleCollection = await mongoHelper.getCollection("articles");

@@ -30,7 +30,7 @@ describe("./src/data/db-add-article", () => {
       getId(): Promise<IArticle> {
         return;
       }
-      update(data: IUpdateArticle): Promise<IArticle> {
+      update(id: string, data: IUpdateArticle): Promise<IArticle> {
         return;
       }
       delete(id: string): Promise<void> {
