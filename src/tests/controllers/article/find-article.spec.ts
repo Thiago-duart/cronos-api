@@ -3,7 +3,7 @@ import { ServerError } from "@/controllers/errors/server-error";
 import { IArticle } from "@/domain/models/article";
 import { IFindArticle } from "@/domain/usecase/article-usecases";
 
-describe("", () => {
+describe("src/controller/article/findId-article", () => {
   interface IMakeSut {
     sut: FindArticleController;
     findArticleStub: IFindArticle;
