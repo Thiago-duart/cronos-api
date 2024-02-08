@@ -10,6 +10,10 @@ describe("./src/infra/db/mongodb/add-article-repositore", () => {
   beforeAll(async () => {
     await mongoHelper.connect(global.__MONGO_URI__);
   });
+  beforeEach(async () => {
+    const collections = await mongoHelper.getCollection("articles");
+    await collections.deleteMany({});
+  });
   afterAll(async () => {
     await mongoHelper.desconect();
   });
@@ -20,5 +24,11 @@ describe("./src/infra/db/mongodb/add-article-repositore", () => {
     expect(id).toBeTruthy();
     expect(data.title).toEqual(articleData.validData.body.title);
     expect(data.article).toEqual(articleData.validData.body.article);
+  });
+  test("should return an array of articles", async () => {
+    const { sut } = makeSut();
+    await sut.add(articleData.validData.body);
+    const response = await sut.get();
+    expect(response).toBeTruthy();
   });
 });
