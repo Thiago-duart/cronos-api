@@ -5,6 +5,7 @@ import {
 } from "@/data/interface/article-repositore";
 import { IArticle } from "@/domain/models/article";
 import { mongoHelper } from "../helpers/mongo-helper";
+import { ObjectId } from "mongodb";
 
 export class AddArticleRepositore implements IArticleRepositore {
   async add(data: IArticleRequest): Promise<IArticle> {
@@ -31,9 +32,15 @@ export class AddArticleRepositore implements IArticleRepositore {
     });
     return formatArticles;
   }
-  async getId(): Promise<IArticle> {
+  async getId(id: string): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");
-    return;
+    const article = await articleCollection.findOne({ _id: new ObjectId(id) });
+    return {
+      id: article._id.toString(),
+      img: article.img,
+      title: article.title,
+      article: article.article,
+    };
   }
   async update(data: IUpdateArticle): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");

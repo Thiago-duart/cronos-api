@@ -13,7 +13,7 @@ export interface IUpdateArticle {
 export interface IArticleRepositore {
   add(data: IArticleRequest): Promise<IArticle>;
   get(): Promise<IArticle[]>;
-  getId(): Promise<IArticle>;
+  getId(id: string): Promise<IArticle>;
   update(data: IUpdateArticle): Promise<IArticle>;
   delete(id: string): Promise<void>;
 }
