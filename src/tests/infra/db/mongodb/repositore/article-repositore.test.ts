@@ -27,26 +27,27 @@ describe("./src/infra/db/mongodb/add-article-repositore", () => {
   });
   test("should return an array of articles", async () => {
     const { sut } = makeSut();
-    await sut.add(articleData.validData.body);
+    const create = await sut.add(articleData.validData.body);
     const response = await sut.get();
-    expect(response).toBeTruthy();
+    expect(Array.isArray(response)).toBe(true);
+    expect(response[0].id).toBe(create.id);
   });
   test("should return an article searched by id", async () => {
     const { sut } = makeSut();
     const create = await sut.add(articleData.validData.body);
     const response = await sut.getId(create.id);
-    expect(response).toBeTruthy();
+    expect(response.id).toBe(create.id);
   });
   test("should return an article updated", async () => {
     const { sut } = makeSut();
     const create = await sut.add(articleData.validData.body);
     const response = await sut.update(create.id, { title: "updated" });
-    expect(response).toBeTruthy();
+    expect(response.title).toBe("updated");
   });
   test("should return true when to delete", async () => {
     const { sut } = makeSut();
     const create = await sut.add(articleData.validData.body);
     const response = await sut.delete(create.id);
-    expect(response).toBeTruthy();
+    expect(response).toBe(true);
   });
 });
