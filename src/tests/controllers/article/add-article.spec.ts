@@ -6,7 +6,7 @@ import { IArticle } from "@/domain/models/article";
 import { ServerError } from "@/controllers/errors/server-error";
 import { articleData } from "../../mocks/article-data";
 
-describe("./src/controllers/article", () => {
+describe("./src/controllers/article/add-article", () => {
   interface IMakeSut {
     sut: AddArticleController;
     dataValidatorStub: IValidator;
