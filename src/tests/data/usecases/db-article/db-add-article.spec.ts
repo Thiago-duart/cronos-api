@@ -6,7 +6,7 @@ import {
 import { DbAddArticle } from "@/data/usecases/db-article/db-add-article";
 import { IArticle } from "@/domain/models/article";
 import { IAddArticle } from "@/domain/usecase/article-usecases";
-import { articleData } from "../../mocks/article-data";
+import { articleData } from "../../../mocks/article-data";
 
 describe("./src/data/db-add-article", () => {
   interface IMakeSut {
