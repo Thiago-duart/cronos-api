@@ -1,7 +1,6 @@
 import {
   IArticleRepositore,
   IArticleRequest,
-  IUpdateArticle,
 } from "@/data/interface/article-repositore";
 import { IArticle } from "@/domain/models/article";
 import { IFindArticle } from "@/domain/usecase/article-usecases";
@@ -32,7 +31,7 @@ describe("./src/data/db-add-article", () => {
       findId(): Promise<IArticle> {
         return;
       }
-      update(id: string, data: IUpdateArticle): Promise<IArticle> {
+      update(id: string, data: any): Promise<IArticle> {
         return;
       }
       delete(id: string): Promise<boolean> {
