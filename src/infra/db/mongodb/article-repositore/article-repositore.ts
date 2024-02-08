@@ -18,16 +18,29 @@ export class AddArticleRepositore implements IArticleRepositore {
       article: article.article,
     };
   }
-  get(): Promise<IArticle[]> {
+  async get(): Promise<IArticle[]> {
+    const articleCollection = await mongoHelper.getCollection("articles");
+    const articles = await articleCollection.find().toArray();
+    const formatArticles = articles.map((article) => {
+      return {
+        id: article._id.toString(),
+        img: article.img,
+        title: article.title,
+        article: article.article,
+      };
+    });
+    return formatArticles;
+  }
+  async getId(): Promise<IArticle> {
+    const articleCollection = await mongoHelper.getCollection("articles");
     return;
   }
-  getId(): Promise<IArticle> {
+  async update(data: IUpdateArticle): Promise<IArticle> {
+    const articleCollection = await mongoHelper.getCollection("articles");
     return;
   }
-  update(data: IUpdateArticle): Promise<IArticle> {
-    return;
-  }
-  delete(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
+    const articleCollection = await mongoHelper.getCollection("articles");
     return;
   }
 }
