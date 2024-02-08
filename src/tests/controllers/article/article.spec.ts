@@ -58,6 +58,7 @@ describe("./src/controllers/article", () => {
           body: {
             id: "valid-id",
             title: "valid-title",
+            img: "valid-img",
             article: "valid-article",
           },
         };

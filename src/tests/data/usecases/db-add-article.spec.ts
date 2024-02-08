@@ -1,6 +1,7 @@
 import {
   IArticleRepositore,
   IArticleRequest,
+  IUpdateArticle,
 } from "@/data/interface/article-repositore";
 import { DbAddArticle } from "@/data/usecases/db-add-article/db-add-article";
 import { IArticle } from "@/domain/models/article";
@@ -18,9 +19,22 @@ describe("./src/data/db-add-article", () => {
         const fakeArticle = {
           id: "valid-id",
           title: "valid-title",
+          img: "valid-img",
           article: "valid-article",
         };
         return fakeArticle;
+      }
+      get(): Promise<IArticle[]> {
+        return;
+      }
+      getId(): Promise<IArticle> {
+        return;
+      }
+      update(data: IUpdateArticle): Promise<IArticle> {
+        return;
+      }
+      delete(id: string): Promise<void> {
+        return;
       }
     }
     const articleRepositoreStub = new ArticleRepositoreStub();

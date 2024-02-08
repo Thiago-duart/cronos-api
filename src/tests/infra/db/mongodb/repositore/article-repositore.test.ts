@@ -1,4 +1,4 @@
-import { AddArticleRepositore } from "@/infra/db/mongodb/article-repositore/add-article-repositore";
+import { AddArticleRepositore } from "@/infra/db/mongodb/article-repositore/article-repositore";
 import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper";
 import { articleData } from "../../../../mocks/article-data";
 import "dotenv/config";
