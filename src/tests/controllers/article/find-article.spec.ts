@@ -43,4 +43,15 @@ describe("", () => {
     await sut.handle();
     expect(findSpy).toHaveBeenCalled();
   });
+  test("should return 500 if receive an unexpected error", async () => {
+    const { sut, findArticleStub } = makeSut();
+    jest
+      .spyOn(findArticleStub, "find")
+      .mockImplementationOnce(async (): Promise<any> => {
+        throw new Error();
+      });
+    const response = await sut.handle();
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toEqual(new ServerError("fake"));
+  });
 });
