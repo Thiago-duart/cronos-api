@@ -4,7 +4,7 @@ export interface IArticleRequest {
   img: string;
   article: string;
 }
-export interface IUpdateArticle {
+export interface IUpdateArticleRequest {
   id?: string;
   img?: string;
   title?: string;
@@ -14,6 +14,6 @@ export interface IArticleRepositore {
   add(data: IArticleRequest): Promise<IArticle>;
   find(): Promise<IArticle[]>;
   findId(id: string): Promise<IArticle>;
-  update(id: string, data: IUpdateArticle): Promise<IArticle>;
+  update(id: string, data: IUpdateArticleRequest): Promise<IArticle>;
   delete(id: string): Promise<boolean>;
 }
