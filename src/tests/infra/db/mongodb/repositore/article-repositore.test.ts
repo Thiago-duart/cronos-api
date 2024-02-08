@@ -28,14 +28,14 @@ describe("./src/infra/db/mongodb/add-article-repositore", () => {
   test("should return an array of articles", async () => {
     const { sut } = makeSut();
     const create = await sut.add(articleData.validData.body);
-    const response = await sut.get();
+    const response = await sut.find();
     expect(Array.isArray(response)).toBe(true);
     expect(response[0].id).toBe(create.id);
   });
   test("should return an article searched by id", async () => {
     const { sut } = makeSut();
     const create = await sut.add(articleData.validData.body);
-    const response = await sut.getId(create.id);
+    const response = await sut.findId(create.id);
     expect(response.id).toBe(create.id);
   });
   test("should return an article updated", async () => {

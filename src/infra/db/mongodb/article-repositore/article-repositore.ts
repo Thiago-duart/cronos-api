@@ -19,7 +19,7 @@ export class AddArticleRepositore implements IArticleRepositore {
       article: article.article,
     };
   }
-  async get(): Promise<IArticle[]> {
+  async find(): Promise<IArticle[]> {
     const articleCollection = await mongoHelper.getCollection("articles");
     const articles = await articleCollection.find().toArray();
     const formatArticles = articles.map((article) => {
@@ -32,7 +32,7 @@ export class AddArticleRepositore implements IArticleRepositore {
     });
     return formatArticles;
   }
-  async getId(id: string): Promise<IArticle> {
+  async findId(id: string): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");
     const article = await articleCollection.findOne({ _id: new ObjectId(id) });
     return {

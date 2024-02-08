@@ -1,4 +1,4 @@
-import { ArticleController } from "@/controllers/article/article";
+import { AddArticleController } from "@/controllers/article/add-article";
 import { ParamError } from "@/controllers/errors/params-errors";
 import { IValidator } from "@/controllers/interface/data-validator";
 import { IAddArticle } from "@/domain/usecase/add-article";
@@ -8,7 +8,7 @@ import { articleData } from "../../mocks/article-data";
 
 describe("./src/controllers/article", () => {
   interface IMakeSut {
-    article: ArticleController;
+    article: AddArticleController;
     dataValidatorStub: IValidator;
     addArticleStub: IAddArticle;
   }
@@ -25,7 +25,7 @@ describe("./src/controllers/article", () => {
     }
     const addArticleStub = new AddArticleStub();
     const dataValidatorStub = new DataValidatorStub();
-    const article = new ArticleController(dataValidatorStub, addArticleStub);
+    const article = new AddArticleController(dataValidatorStub, addArticleStub);
     return { article, dataValidatorStub, addArticleStub };
   }
   test("should return 400 and an error message = title not found", async () => {

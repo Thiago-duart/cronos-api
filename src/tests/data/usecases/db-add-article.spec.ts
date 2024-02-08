@@ -3,7 +3,7 @@ import {
   IArticleRequest,
   IUpdateArticle,
 } from "@/data/interface/article-repositore";
-import { DbAddArticle } from "@/data/usecases/db-add-article/db-add-article";
+import { DbAddArticle } from "@/data/usecases/db-article/db-add-article";
 import { IArticle } from "@/domain/models/article";
 import { IAddArticle } from "@/domain/usecase/add-article";
 import { articleData } from "../../mocks/article-data";
@@ -24,10 +24,10 @@ describe("./src/data/db-add-article", () => {
         };
         return fakeArticle;
       }
-      get(): Promise<IArticle[]> {
+      find(): Promise<IArticle[]> {
         return;
       }
-      getId(): Promise<IArticle> {
+      findId(): Promise<IArticle> {
         return;
       }
       update(id: string, data: IUpdateArticle): Promise<IArticle> {

@@ -5,7 +5,7 @@ import { IControllers, IHttpRequest, IHttpResponse } from "../interface";
 import { IValidator } from "../interface/data-validator";
 import { ServerError } from "../errors/server-error";
 
-export class ArticleController implements IControllers {
+export class AddArticleController implements IControllers {
   private readonly datavalidator: IValidator;
   private readonly addArticle: IAddArticle;
   constructor(datavalidator: IValidator, addArticle: IAddArticle) {

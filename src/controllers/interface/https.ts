@@ -1,5 +1,5 @@
 export interface IHttpRequest {
-  body: any;
+  body?: any;
 }
 export interface IHttpResponse {
   statusCode: number;
