@@ -15,5 +15,5 @@ export interface IArticleRepositore {
   get(): Promise<IArticle[]>;
   getId(id: string): Promise<IArticle>;
   update(id: string, data: IUpdateArticle): Promise<IArticle>;
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<boolean>;
 }

@@ -56,8 +56,11 @@ export class AddArticleRepositore implements IArticleRepositore {
       article: article.article,
     };
   }
-  async delete(id: string): Promise<void> {
+  async delete(id: string): Promise<boolean> {
     const articleCollection = await mongoHelper.getCollection("articles");
-    return;
+    const deleteArticle = await articleCollection.deleteOne({
+      _id: new ObjectId(id),
+    });
+    return deleteArticle.acknowledged;
   }
 }
