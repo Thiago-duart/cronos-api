@@ -1,4 +1,5 @@
 import { FindIdArticleController } from "@/controllers/article/findId-article";
+import { ParamError } from "@/controllers/errors/params-errors";
 import { ServerError } from "@/controllers/errors/server-error";
 import { IArticle } from "@/domain/models/article";
 import { IFindIdArticle } from "@/domain/usecase/article-usecases";
@@ -41,6 +42,12 @@ describe("src/controller/article/finId-article", () => {
     await sut.handle({ body: { id: "valid-id" } });
     expect(findIdSpy).toHaveBeenCalled();
   });
+  test("should return paramError missing param", async () => {
+    const { sut } = makeSut();
+    const response = await sut.handle();
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toEqual(new ParamError("missing: id"));
+  });
   test("should return 500 if receive an unexpected error", async () => {
     const { sut, findIdArticleStub } = makeSut();
     jest
@@ -48,7 +55,7 @@ describe("src/controller/article/finId-article", () => {
       .mockImplementationOnce(async (): Promise<any> => {
         throw new Error();
       });
-    const response = await sut.handle();
+    const response = await sut.handle({ body: { id: "valid-id" } });
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError("fake"));
   });
