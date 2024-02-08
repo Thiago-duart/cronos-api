@@ -37,4 +37,10 @@ describe("./src/infra/db/mongodb/add-article-repositore", () => {
     const response = await sut.getId(create.id);
     expect(response).toBeTruthy();
   });
+  test("should return an article updated", async () => {
+    const { sut } = makeSut();
+    const create = await sut.add(articleData.validData.body);
+    const response = await sut.update(create.id, { title: "updated" });
+    expect(response).toBeTruthy();
+  });
 });
