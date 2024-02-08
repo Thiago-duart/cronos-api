@@ -37,7 +37,7 @@ describe("", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual([expectResponse]);
   });
-  test("should call addArticle with corretly data", async () => {
+  test("should call findArticle with corretly data", async () => {
     const { sut, findArticleStub } = makeSut();
     const findSpy = jest.spyOn(findArticleStub, "find");
     await sut.handle();
