@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"tsnd --respawn src/main/server.ts",
+    "dev": "tsnd --respawn src/main/server.ts",
     "test": "jest",
     "test:unit": "npm test --silent -- -c jest-unit.config.ts",
     "test:integration": "pnpm test --silent --  -c jest-integration.config.ts",
     "test:verbose": "jest --verbose",
-    "prepare": "husky install"
+    "prepare": "husky init"
   },
   "keywords": [],
   "author": "",
@@ -40,5 +40,8 @@
     "express": "^4.18.2",
     "mongodb": "6.3.0",
     "typescript": "5.3.3"
+  },
+  "hooks": {
+    "pre-commit": "commitlint.config.js"
   }
 }
