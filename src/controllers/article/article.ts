@@ -1,16 +1,10 @@
-import { IArticleDomain } from "@/domain/usecase/article.usecase";
-import { IArticleController } from "../interface/article-controller";
-import { IHttpResponse } from "../interface";
-import { badRequest, created, noContent, ok, serverError } from "../helpers/http-response";
-import { ParamError } from "../errors/params-errors";
-import { ServerError } from "../errors/server-error";
-import { IValidator } from "../interface/data-validator";
+import { IArticleMethods, IHttpResponse, IValidator, ParamError, ServerError, badRequest, created, noContent, ok, serverError,IArticleController } from ".";
 
 export class ArticleController implements  IArticleController{
-    private readonly articleDomain: IArticleDomain;
+    private readonly articleMethods: IArticleMethods;
     private readonly validator: IValidator
-    constructor(articleDomain:IArticleDomain,validator:IValidator) {
-        this.articleDomain = articleDomain
+    constructor(articleMethods:IArticleMethods,validator:IValidator) {
+        this.articleMethods = articleMethods
         this.validator = validator
     }
     async add(request: any): Promise<IHttpResponse> {
@@ -21,16 +15,16 @@ export class ArticleController implements  IArticleController{
             if (isValid) {
               return badRequest(new ParamError(isValid));
             }
-            const response = await this.articleDomain.add(request.body);
+            const response = await this.articleMethods.add(request.body);
             return created(response);
           } catch (error) {
             return serverError(new ServerError(error.stack));
           } 
     }
-    
+
    async find(): Promise<IHttpResponse> {
     try {
-        const response = await this.articleDomain.find();
+        const response = await this.articleMethods.find();
         return ok(response);
       } catch (error) {
         return serverError(new ServerError(error.stack));
@@ -43,7 +37,7 @@ export class ArticleController implements  IArticleController{
             if (!id) {
               return badRequest(new ParamError("missing: id"));
             }
-            const response = await this.articleDomain.findId(id);
+            const response = await this.articleMethods.findId(id);
             return ok(response);
           } catch (error) {
             return serverError(new ServerError(error.stack));
@@ -56,7 +50,7 @@ export class ArticleController implements  IArticleController{
             if (!id) {
               return badRequest(new ParamError("missing: id"));
             }
-            const updated = await this.articleDomain.update(id, data);
+            const updated = await this.articleMethods.update(id, data);
             return ok(updated);
           } catch (error) {
             return serverError(new ServerError(error.stack));
@@ -69,7 +63,7 @@ export class ArticleController implements  IArticleController{
             if (!id) {
               return badRequest(new ParamError("missing: id"));
             }
-            await this.articleDomain.delete(id);
+            await this.articleMethods.delete(id);
             return noContent();
           } catch (error) {
             return serverError(new ServerError(error.stack));

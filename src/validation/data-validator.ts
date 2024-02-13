@@ -1,4 +1,4 @@
-import { IValidator } from "@/controllers/interface/data-validator";
+import { IValidator } from "@/controllers/interface/validator";
 
 export class DataValidator implements IValidator {
   validate(data: any) {
