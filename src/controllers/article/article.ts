@@ -1,4 +1,4 @@
-import { IArticleMethods, IHttpResponse, IValidator, ParamError, ServerError, badRequest, created, noContent, ok, serverError, IArticleController } from ".";
+import { IArticleMethods, IHttpResponse, IValidator, ServerError, badRequest, created, noContent, ok, serverError, IArticleController } from ".";
 
 export class ArticleController implements IArticleController {
   private readonly articleMethods: IArticleMethods;
@@ -33,7 +33,7 @@ export class ArticleController implements IArticleController {
     try {
       const id = request?.params?.id || false;
       if (!id) {
-        return badRequest(new ParamError("missing: id"));
+        return badRequest({ error: { id: "Required" } });
       }
       const response = await this.articleMethods.findId(id);
       return ok(response);
@@ -45,7 +45,7 @@ export class ArticleController implements IArticleController {
     try {
       const id = request?.params?.id || false;
       if (!id) {
-        return badRequest(new ParamError("missing: id"));
+        return badRequest({ error: { id: "Required" } });
       }
       const data = request?.body
       const updated = await this.articleMethods.update(id, data);
@@ -58,7 +58,7 @@ export class ArticleController implements IArticleController {
     try {
       const id = request?.params || false;
       if (!id) {
-        return badRequest(new ParamError("missing: id"));
+        return badRequest({ error: { id: "Required" } });
       }
       await this.articleMethods.delete(id);
       return noContent();

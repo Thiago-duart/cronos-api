@@ -1,4 +1,4 @@
-import { ParamError, ServerError } from "@/controllers/errors";
+import { ServerError } from "@/controllers/errors";
 import { articleData } from "../../mocks/article-data";
 import { makeSut } from "./makeSut"
 describe("./src/controllers/article/add-article", () => {

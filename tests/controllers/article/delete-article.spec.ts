@@ -1,4 +1,3 @@
-import { ParamError } from "@/controllers/errors/params-errors";
 import { ServerError } from "@/controllers/errors/server-error";
 import { makeSut } from "./makeSut";
 describe("src/controller/article/delete-article", () => {
@@ -13,11 +12,11 @@ describe("src/controller/article/delete-article", () => {
     await sut.delete({ params: { id: "valid-id" } });
     expect(deleteSpy).toHaveBeenCalledWith({ id: "valid-id" });
   });
-  test("should return paramError missing param --- method delete", async () => {
+  test("should return require id  --- method delete", async () => {
     const { sut } = makeSut();
     const response = await sut.delete({});
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual(new ParamError("missing: id"));
+    expect(response.body).toEqual({ error: { id: "Required" } });
   });
   test("should return 500 if receive an unexpected error --- method delete", async () => {
     const { sut, articleMethodsStub } = makeSut();

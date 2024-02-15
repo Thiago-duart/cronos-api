@@ -1,4 +1,3 @@
-import { ParamError } from "@/controllers/errors/params-errors";
 import { ServerError } from "@/controllers/errors/server-error";
 import { makeSut } from "./makeSut";
 describe("src/controller/article/finId-article", () => {
@@ -20,11 +19,11 @@ describe("src/controller/article/finId-article", () => {
     await sut.findId({ params: { id: "valid-id" } });
     expect(findIdSpy).toHaveBeenCalled();
   });
-  test("should return paramError missing param --- method findId", async () => {
+  test("should return require id --- method findId", async () => {
     const { sut } = makeSut();
     const response = await sut.findId({});
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual(new ParamError("missing: id"));
+    expect(response.body).toEqual({ error: { id: "Required" } });
   });
   test("should return 500 if receive an unexpected error --- method findId", async () => {
     const { sut, articleMethodsStub } = makeSut();

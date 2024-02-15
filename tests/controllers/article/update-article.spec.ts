@@ -1,4 +1,3 @@
-import { ParamError } from "@/controllers/errors/params-errors";
 import { ServerError } from "@/controllers/errors/server-error";
 import { makeSut } from "./makeSut";
 describe("src/controller/article/finId-article", () => {
@@ -48,10 +47,10 @@ describe("src/controller/article/finId-article", () => {
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError("fake"));
   });
-  test("should return paramError missing param --- method update", async () => {
+  test("should return require id --- method update", async () => {
     const { sut } = makeSut();
     const response = await sut.update({});
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual(new ParamError("missing: id"));
+    expect(response.body).toEqual({ error: { id: "Required" } });
   });
 });
