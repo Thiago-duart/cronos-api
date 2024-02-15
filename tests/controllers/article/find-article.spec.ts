@@ -1,7 +1,7 @@
 import { ServerError } from "@/controllers/errors/server-error";
 import { makeSut } from "./makeSut";
 describe("src/controller/article/findId-article", () => {
-    test("should return 200 and an array IArticle --- method find", async () => {
+  test("should return 200 and an array IArticle --- method find", async () => {
     const { sut } = makeSut();
     const response = await sut.find();
     const expectResponse = {
