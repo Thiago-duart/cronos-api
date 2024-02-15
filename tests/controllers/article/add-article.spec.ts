@@ -1,26 +1,24 @@
-import { ParamError,ServerError } from "@/controllers/errors";
+import { ParamError, ServerError } from "@/controllers/errors";
 import { articleData } from "../../mocks/article-data";
 import { makeSut } from "./makeSut"
 describe("./src/controllers/article/add-article", () => {
-  test("should return 400 and an error message title not found --- method add", async () => {
+  test("should return 400 and an error message title generic error --- method add", async () => {
     const { sut, validatorStub } = makeSut();
-    jest.spyOn(validatorStub, "validate").mockImplementationOnce((data) => {
-      return "title not found";
+    jest.spyOn(validatorStub, "addValidate").mockImplementationOnce((data) => {
+      return { title: "title generic error" };
     });
     const httpResponse = await sut.add(articleData.withoutTitle);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new ParamError("title not found"));
+    expect(httpResponse.body).toEqual({ error: { title: "title generic error" } });
   });
-  test("should return 400 and an error message article not found --- method add", async () => {
+  test("should return 400 and an error message article generic error --- method add", async () => {
     const { sut, validatorStub } = makeSut();
-    jest.spyOn(validatorStub, "validate").mockImplementationOnce((data) => {
-      return "article not found";
+    jest.spyOn(validatorStub, "addValidate").mockImplementationOnce((data) => {
+      return { article: "article generic error" };
     });
     const httpResponse = await sut.add(articleData.withoutArticle);
-    expect(httpResponse).toEqual({
-      body: new ParamError("article not found"),
-      statusCode: 400,
-    });
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual({ error: { article: "article generic error" } });
   });
   test("should return 200 in case of success --- method add", async () => {
     const { sut } = makeSut();
@@ -39,28 +37,6 @@ describe("./src/controllers/article/add-article", () => {
     expect(httpResponse).toEqual({
       body: articleData.successArticle.body,
       statusCode: 200,
-    });
-  });
-  test("should return 400 if the data type to invalid - title --- method add", async () => {
-    const { sut, validatorStub } = makeSut();
-    jest.spyOn(validatorStub, "validate").mockImplementationOnce((data) => {
-      return "title shold be string";
-    });
-    const httpResponse = await sut.add(articleData.invalidTitle);
-    expect(httpResponse).toEqual({
-      body: new ParamError("title shold be string"),
-      statusCode: 400,
-    });
-  });
-  test("should return 400 if the data type to invalid - article --- method add", async () => {
-    const { sut, validatorStub } = makeSut();
-    jest.spyOn(validatorStub, "validate").mockImplementationOnce((data) => {
-      return "article shold be string";
-    });
-    const httpResponse = await sut.add(articleData.invalidTitle);
-    expect(httpResponse).toEqual({
-      body: new ParamError("article shold be string"),
-      statusCode: 400,
     });
   });
   test("should call addArticle with corretly data --- method add", async () => {
