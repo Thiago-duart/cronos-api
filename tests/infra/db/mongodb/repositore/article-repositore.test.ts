@@ -1,10 +1,11 @@
-import { AddArticleRepositore } from "@/infra/db/mongodb/article-repositore/article-repositore";
+
 import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper";
 import { articleData } from "../../../../mocks/article-data";
 import "dotenv/config";
+import { MongoArticleRepositore } from "@/infra/db/mongodb/article-repositore/article.repositore";
 describe("./src/infra/db/mongodb/add-article-repositore", () => {
   function makeSut() {
-    const sut = new AddArticleRepositore();
+    const sut = new MongoArticleRepositore();
     return { sut };
   }
   beforeAll(async () => {

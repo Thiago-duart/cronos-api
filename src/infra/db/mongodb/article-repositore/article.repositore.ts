@@ -1,12 +1,12 @@
 import {
   IArticleRepositore,
   IArticleRequest,
-} from "@/data/interface/article-repositore";
+} from "@/data/interface/article.repositore";
 import { IArticle } from "@/domain/models/article";
 import { mongoHelper } from "../helpers/mongo-helper";
 import { ObjectId } from "mongodb";
 
-export class AddArticleRepositore implements IArticleRepositore {
+export class MongoArticleRepositore implements IArticleRepositore {
   async add(data: IArticleRequest): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");
     const create = await articleCollection.insertOne(data);

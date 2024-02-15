@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { RoutesArticleAdapter } from "../adapters/routes-article.adapter";
-import { articleFactor } from "../factors/article.factor";
+import { articleFactor } from "../factors/controller/article.factor";
 
 export function routesArticle(router: Router) {
     const articleAdapter = new RoutesArticleAdapter(articleFactor())
