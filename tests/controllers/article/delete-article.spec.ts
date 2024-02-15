@@ -1,17 +1,17 @@
 import { ParamError } from "@/controllers/errors/params-errors";
 import { ServerError } from "@/controllers/errors/server-error";
 import { makeSut } from "./makeSut";
-describe("src/controller/article/finId-article", () => {
+describe("src/controller/article/delete-article", () => {
   test("should return 204 no content --- method delete", async () => {
     const { sut } = makeSut();
-    const response = await sut.delete({ body: { id: "valid-id" } });
+    const response = await sut.delete({ params: { id: "valid-id" } });
     expect(response.statusCode).toBe(204);
   });
   test("should call deleteArticle with corretly data --- method delete", async () => {
     const { sut, articleMethodsStub } = makeSut();
     const deleteSpy = jest.spyOn(articleMethodsStub, "delete");
-    await sut.delete({ body: { id: "valid-id" } });
-    expect(deleteSpy).toHaveBeenCalledWith("valid-id");
+    await sut.delete({ params: { id: "valid-id" } });
+    expect(deleteSpy).toHaveBeenCalledWith({ id: "valid-id" });
   });
   test("should return paramError missing param --- method delete", async () => {
     const { sut } = makeSut();
@@ -26,7 +26,7 @@ describe("src/controller/article/finId-article", () => {
       .mockImplementationOnce(async (): Promise<any> => {
         throw new Error();
       });
-    const response = await sut.delete({ body: { id: "valid-id" } });
+    const response = await sut.delete({ params: { id: "valid-id" } });
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError("fake"));
   });
