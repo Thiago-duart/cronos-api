@@ -23,7 +23,8 @@ describe("src/controller/article/finId-article", () => {
       article: "valid-article",
     };
     const response = await sut.update({
-      body: { id: "valid-id", title: "update-title" },
+      body: { title: "update-title" },
+      params: { id: "valid-id" }
     });
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(expectResponse);
@@ -31,7 +32,7 @@ describe("src/controller/article/finId-article", () => {
   test("should call updateArticle with corretly data --- method update", async () => {
     const { sut, articleMethodsStub } = makeSut();
     const findIdSpy = jest.spyOn(articleMethodsStub, "update");
-    await sut.update({ body: { id: "valid-id", title: "valid-title" } });
+    await sut.update({ body: { title: "valid-title" }, params: { id: "valid-id" } });
     expect(findIdSpy).toHaveBeenCalled();
   });
   test("should return 500 if receive an unexpected error --- method update", async () => {
@@ -42,7 +43,7 @@ describe("src/controller/article/finId-article", () => {
         throw new Error();
       });
     const response = await sut.update({
-      body: { id: "valid-id", title: "valid-title" },
+      body: { title: "valid-title" }, params: { id: "valid-id" }
     });
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError("fake"));
