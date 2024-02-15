@@ -1,18 +1,23 @@
-import { IValidator } from "@/controllers/interface/validator";
+//@ts-check
+import { IValidator } from "@/controllers/interface/crud-validator";
+import { ZodError, z } from "zod";
+export class Validator implements IValidator {
 
-export class DataValidator implements IValidator {
-  validate(data: any) {
-    const verify = ["title", "article"];
-    for (let key of verify) {
-      if (!data[key]) {
-        return `${key} not found`;
+  addValidate(data: any) {
+    try {
+      const schemadata = z.object({
+        title: z.string().max(90, { message: "title must have a maximum 90 characters" }),
+        img: z.string(),
+        article: z.string()
+      })
+      schemadata.parse(data)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return { ...error.flatten()?.fieldErrors }
       }
     }
+  }
+  updateValidate(data: any) {
 
-    for (let key of verify) {
-      if (typeof data[key] === "string") {
-        return `${key} should be string`;
-      }
-    }
   }
 }

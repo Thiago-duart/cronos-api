@@ -1,7 +1,6 @@
-import { ParamError } from "../errors/params-errors";
 import { IHttpResponse } from "../interface";
 
-export function badRequest(error: Error): IHttpResponse {
+export function badRequest(error: object): IHttpResponse {
   return {
     body: error,
     statusCode: 400,

@@ -1,7 +1,6 @@
 import {
   IArticleRepositore,
   IArticleRequest,
-  IUpdateArticle,
 } from "@/data/interface/article-repositore";
 import { IArticle } from "@/domain/models/article";
 import { mongoHelper } from "../helpers/mongo-helper";
@@ -42,7 +41,7 @@ export class AddArticleRepositore implements IArticleRepositore {
       article: article.article,
     };
   }
-  async update(id: string, data: IUpdateArticle): Promise<IArticle> {
+  async update(id: string, data: any): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");
     const update = await articleCollection.updateOne(
       { _id: new ObjectId(id) },

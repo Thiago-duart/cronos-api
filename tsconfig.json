@@ -1,16 +1,29 @@
-{"compilerOptions": {
-  "outDir": "dist",
-  "module": "CommonJS",
-  "target": "ES6",
-  "esModuleInterop": true,
-  "sourceMap": true,
-  "rootDirs": ["src", "tests"],
-  "baseUrl": "src",
-  "paths": {
-    "@/tests/*": ["../tests/*"],
-    "@/*": ["*"]
-  }
-},
-"include": ["src", "tests"],
-"exclude": ["node_modules"]
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "CommonJS",
+    "target": "ES6",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "rootDirs": [
+      "src",
+      "tests"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@/tests/*": [
+        "../tests/*"
+      ],
+      "@/*": [
+        "*"
+      ]
+    },
+  },
+  "include": [
+    "src",
+    "tests"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
