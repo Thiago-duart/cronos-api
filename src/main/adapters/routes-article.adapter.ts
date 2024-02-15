@@ -19,19 +19,35 @@ export class RoutesArticleAdapter {
     }
     findId() {
         return async (req: Request, res: Response) => {
-            const response = await this.articleController.findId(req)
+            const httRequest = {
+                body: {
+                    id: req.params.id || null,
+                }
+            }
+            const response = await this.articleController.findId(httRequest)
             res.status(response.statusCode).json(response.body)
         }
     }
     update() {
         return async (req: Request, res: Response) => {
-            const response = await this.articleController.update(req)
+            const httRequest = {
+                body: {
+                    id: req.params.id || null,
+                    ...req.body
+                }
+            }
+            const response = await this.articleController.update(httRequest)
             res.status(response.statusCode).json(response.body)
         }
     }
     delete() {
         return async (req: Request, res: Response) => {
-            const response = await this.articleController.delete(req)
+            const httRequest = {
+                body: {
+                    id: req.params.id || null,
+                }
+            }
+            const response = await this.articleController.delete(httRequest)
             res.status(response.statusCode).json(response.body)
         }
     }

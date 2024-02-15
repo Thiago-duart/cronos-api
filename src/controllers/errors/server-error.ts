@@ -1,6 +1,6 @@
 export class ServerError extends Error {
   constructor(error: string) {
-    super("Ouve um erro interno");
+    super("there was an internal error");
     this.name = "server error";
     this.stack = error;
   }

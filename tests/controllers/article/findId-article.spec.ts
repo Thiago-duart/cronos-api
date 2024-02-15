@@ -3,7 +3,7 @@ import { makeSut } from "./makeSut";
 describe("src/controller/article/finId-article", () => {
   test("should return 200 and an array IArticle --- method findId", async () => {
     const { sut } = makeSut();
-    const response = await sut.findId({ params: { id: "valid-id" } });
+    const response = await sut.findId({ body: { id: "valid-id" } });
     const expectResponse = {
       id: "valid-id",
       img: "valid-img",
@@ -16,7 +16,7 @@ describe("src/controller/article/finId-article", () => {
   test("should call findIdArticle with corretly data --- method findId", async () => {
     const { sut, articleMethodsStub } = makeSut();
     const findIdSpy = jest.spyOn(articleMethodsStub, "findId");
-    await sut.findId({ params: { id: "valid-id" } });
+    await sut.findId({ body: { id: "valid-id" } });
     expect(findIdSpy).toHaveBeenCalled();
   });
   test("should return require id --- method findId", async () => {
@@ -32,7 +32,7 @@ describe("src/controller/article/finId-article", () => {
       .mockImplementationOnce(async (): Promise<any> => {
         throw new Error();
       });
-    const response = await sut.findId({ params: { id: "valid-id" } });
+    const response = await sut.findId({ body: { id: "valid-id" } });
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(new ServerError("fake"));
   });

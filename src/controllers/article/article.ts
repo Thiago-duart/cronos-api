@@ -31,7 +31,7 @@ export class ArticleController implements IArticleController {
   }
   async findId(request: any): Promise<IHttpResponse> {
     try {
-      const id = request?.params?.id || false;
+      const id = request?.body?.id || false;
       if (!id) {
         return badRequest({ error: { id: "Required" } });
       }
@@ -43,7 +43,7 @@ export class ArticleController implements IArticleController {
   }
   async update(request: any): Promise<IHttpResponse> {
     try {
-      const id = request?.params?.id || false;
+      const id = request?.body?.id || false;
       if (!id) {
         return badRequest({ error: { id: "Required" } });
       }
@@ -56,7 +56,7 @@ export class ArticleController implements IArticleController {
   }
   async delete(request: any): Promise<IHttpResponse> {
     try {
-      const id = request?.params || false;
+      const id = request?.body.id || false;
       if (!id) {
         return badRequest({ error: { id: "Required" } });
       }
