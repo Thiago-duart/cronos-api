@@ -1,8 +1,8 @@
 import { IHttpResponse } from "../interface";
 
-export function badRequest(error: object): IHttpResponse {
+export function badRequest(message: object): IHttpResponse {
   return {
-    body: error,
+    body: message,
     statusCode: 400,
   };
 }
@@ -24,4 +24,8 @@ export const ok = (data: any): IHttpResponse => ({
 export const noContent = (): IHttpResponse => ({
   statusCode: 204,
   body: {},
+});
+export const notFound = (message: any): IHttpResponse => ({
+  statusCode: 404,
+  body: message,
 });
