@@ -72,4 +72,14 @@ describe("article", () => {
             .send(articleData.withoutImg.body)
             .expect(200, [],)
     });
+    test("should return 200 and an object with the article data  -- get/api/article/:id", async () => {
+        const response = await request(app)
+            .post("/api/article")
+            .send(articleData.validData.body)
+        const { id } = response?.body
+        await request(app)
+            .get(`/api/article/${id}`)
+            .send(articleData.withoutImg.body)
+            .expect(200, response?.body)
+    });
 });
