@@ -30,5 +30,16 @@ describe("article", () => {
                 article: "valid-article"
             },)
     });
-
+    test("should return 400 and message error title required -- article", async () => {
+        await request(app)
+            .post("/api/article")
+            .send(articleData.withoutTitle.body)
+            .expect(400, {
+                error: {
+                    title: [
+                        "Required"
+                    ]
+                }
+            },)
+    });
 });
