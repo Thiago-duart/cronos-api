@@ -14,7 +14,7 @@ describe("article", () => {
     afterAll(async () => {
         await mongoHelper.desconect();
     });
-    test("should must create an account in the database -- article", async () => {
+    test("should must create an account in the database -- post/api/article", async () => {
         await request(app)
             .post("/api/article")
             .send(articleData.validData.body)
@@ -30,7 +30,7 @@ describe("article", () => {
                 article: "valid-article"
             },)
     });
-    test("should return 400 and message error title required -- article", async () => {
+    test("should return 400 and message error title required -- post/api/article", async () => {
         await request(app)
             .post("/api/article")
             .send(articleData.withoutTitle.body)
@@ -42,7 +42,7 @@ describe("article", () => {
                 }
             },)
     });
-    test("should return 400 and message error article required -- article", async () => {
+    test("should return 400 and message error article required -- post/api/article", async () => {
         await request(app)
             .post("/api/article")
             .send(articleData.withoutArticle.body)
@@ -54,7 +54,7 @@ describe("article", () => {
                 }
             },)
     });
-    test("should return 400 and message error img required -- article", async () => {
+    test("should return 400 and message error img required -- post/api/article", async () => {
         await request(app)
             .post("/api/article")
             .send(articleData.withoutImg.body)
@@ -65,5 +65,11 @@ describe("article", () => {
                     ]
                 }
             },)
+    });
+    test("should return 200 and array with all data  -- get/api/article", async () => {
+        await request(app)
+            .get("/api/article")
+            .send(articleData.withoutImg.body)
+            .expect(200, [],)
     });
 });
