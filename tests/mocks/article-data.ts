@@ -18,6 +18,12 @@ export const articleData = {
       title: "valid-title",
     },
   },
+  withoutImg: {
+    body: {
+      article: "valid-article",
+      title: "valid-title",
+    },
+  },
   invalidTitle: {
     body: {
       title: "invalid-title",

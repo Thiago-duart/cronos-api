@@ -54,4 +54,16 @@ describe("article", () => {
                 }
             },)
     });
+    test("should return 400 and message error img required -- article", async () => {
+        await request(app)
+            .post("/api/article")
+            .send(articleData.withoutImg.body)
+            .expect(400, {
+                error: {
+                    img: [
+                        "Required"
+                    ]
+                }
+            },)
+    });
 });
