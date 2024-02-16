@@ -1,4 +1,5 @@
 import { IArticle } from "@/domain/models/article";
+import { any } from "zod";
 export interface IArticleRequest {
   title: string;
   img: string;
@@ -13,7 +14,7 @@ export interface IUpdateArticleRequest {
 export interface IArticleRepositore {
   add(data: IArticleRequest): Promise<IArticle>;
   find(): Promise<IArticle[]>;
-  findId(id: string): Promise<IArticle>;
+  findId(id: string): Promise<IArticle | boolean>;
   update(id: string, data: IUpdateArticleRequest): Promise<IArticle>;
   delete(id: string): Promise<boolean>;
 }

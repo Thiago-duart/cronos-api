@@ -16,7 +16,7 @@ export class DbArticle implements IArticleMethods {
         const articlesResponse = await this.articleRepositore.find()
         return articlesResponse
     }
-    async findId(id: string): Promise<IArticle> {
+    async findId(id: string): Promise<IArticle | any> {
         const articleResponse = await this.articleRepositore.findId(id)
         return articleResponse
     }
