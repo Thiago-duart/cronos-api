@@ -31,15 +31,19 @@ export class MongoArticleRepositore implements IArticleRepositore {
     });
     return formatArticles;
   }
-  async findId(id: string): Promise<IArticle> {
+  async findId(id: string): Promise<IArticle | any> {
     const articleCollection = await mongoHelper.getCollection("articles");
-    const article = await articleCollection.findOne({ _id: new ObjectId(id) });
-    return {
-      id: article._id.toString(),
-      img: article.img,
-      title: article.title,
-      article: article.article,
-    };
+    const article = await articleCollection.findOne({ _id: new ObjectId(id) }) || null;
+    if (article) {
+      const response = {
+        id: article._id.toString(),
+        img: article.img,
+        title: article.title,
+        article: article.article,
+      }
+      return response;
+    }
+    return article
   }
   async update(id: string, data: any): Promise<IArticle> {
     const articleCollection = await mongoHelper.getCollection("articles");
