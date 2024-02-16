@@ -20,7 +20,7 @@ export function makeSut(): IMakeSut {
       return articleData.successArticle.body
     }
     async update(id: string, article: IArticleUpdateRequest): Promise<IArticle> {
-      return articleData.successArticle.body
+      return articleData.successArticleUpdate.body
     }
     async delete(id: string): Promise<boolean> {
       return true

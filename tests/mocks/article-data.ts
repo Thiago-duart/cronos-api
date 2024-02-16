@@ -31,6 +31,14 @@ export const articleData = {
       title: "valid-title",
       img: "valid-img",
       article: "valid-article",
+    }
+  },
+  successArticleUpdate: {
+    body: {
+      id: "valid-id",
+      title: "update-title",
+      img: "valid-img",
+      article: "valid-article",
     },
   },
   invalidArticle: {
