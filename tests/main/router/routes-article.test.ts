@@ -86,7 +86,7 @@ describe("article", () => {
             .get(`/api/article/12`)
             .expect(404, { error: { id: "not found" } })
     });
-    test("should return 200 and an object with the update article data  -- get/api/article/:id", async () => {
+    test("should return 200 and an object with the update article data  -- path/api/article/:id", async () => {
         const response = await request(app)
             .post("/api/article")
             .send(articleData.validData.body)
@@ -100,5 +100,14 @@ describe("article", () => {
                 title: 'update',
                 article: 'valid-article'
             })
+    });
+    test("should return 204 no content when delete  -- delete/api/article/:id", async () => {
+        const response = await request(app)
+            .post("/api/article")
+            .send(articleData.validData.body)
+        const { id } = response?.body
+        await request(app)
+            .delete(`/api/article/${id}`)
+            .expect(204,)
     });
 });
