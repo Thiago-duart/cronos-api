@@ -86,4 +86,19 @@ describe("article", () => {
             .get(`/api/article/12`)
             .expect(404, { error: { id: "not found" } })
     });
+    test("should return 200 and an object with the update article data  -- get/api/article/:id", async () => {
+        const response = await request(app)
+            .post("/api/article")
+            .send(articleData.validData.body)
+        const { id } = response?.body
+        await request(app)
+            .patch(`/api/article/${id}`)
+            .send({ title: "update" })
+            .expect(200, {
+                id,
+                img: 'valid-img',
+                title: 'update',
+                article: 'valid-article'
+            })
+    });
 });
