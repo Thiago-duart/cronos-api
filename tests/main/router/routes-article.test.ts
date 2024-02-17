@@ -79,7 +79,11 @@ describe("article", () => {
         const { id } = response?.body
         await request(app)
             .get(`/api/article/${id}`)
-            .send(articleData.withoutImg.body)
             .expect(200, response?.body)
+    });
+    test("should return 404 and error message id not found -- get/api/article/:id", async () => {
+        await request(app)
+            .get(`/api/article/12`)
+            .expect(404, { error: { id: "not found" } })
     });
 });
