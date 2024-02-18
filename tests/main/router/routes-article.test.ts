@@ -1,7 +1,6 @@
 import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper";
 import app from "@/main/app/app";
 import { articleData } from "../../../tests/mocks/article-data";
-
 import request from "supertest";
 describe("article", () => {
     beforeAll(async () => {
@@ -101,7 +100,7 @@ describe("article", () => {
                 article: 'valid-article'
             })
     });
-    test("should return 204 no content when delete  -- delete/api/article/:id", async () => {
+    test("should return 204 no content when delete -- delete/api/article/:id", async () => {
         const response = await request(app)
             .post("/api/article")
             .send(articleData.validData.body)
