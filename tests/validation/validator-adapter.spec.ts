@@ -30,7 +30,7 @@ describe("/src/validation", () => {
         expect(response).toEqual({ article: ["Required"] })
     })
 
-    test("should return error => expected string, received number", () => {
+    test("should return error => expected string, received number -- title", () => {
         const sut = makeSut()
         const response = sut.addValidate({
             title: 1,
@@ -40,6 +40,30 @@ describe("/src/validation", () => {
 
         expect(response).toEqual({
             title: ["Expected string, received number",]
+        })
+    })
+    test("should return error => expected string, received number -- img", () => {
+        const sut = makeSut()
+        const response = sut.addValidate({
+            title: "valid-img",
+            img: 1,
+            article: "valid-article",
+        })
+
+        expect(response).toEqual({
+            img: ["Expected string, received number",]
+        })
+    })
+    test("should return error => expected string, received number -- article", () => {
+        const sut = makeSut()
+        const response = sut.addValidate({
+            title: "valid-img",
+            img: "valid-img",
+            article: 1,
+        })
+
+        expect(response).toEqual({
+            article: ["Expected string, received number",]
         })
     })
 
