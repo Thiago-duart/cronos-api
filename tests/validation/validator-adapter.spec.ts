@@ -25,4 +25,11 @@ describe("/src/validation", () => {
 
         expect(response).toEqual({ img: ["Required"] })
     })
+    test("should return article required", () => {
+        const sut = makeSut()
+        const response = sut.addValidate(articleData.withoutArticle.body)
+        console.log(response);
+
+        expect(response).toEqual({ article: ["Required"] })
+    })
 })
