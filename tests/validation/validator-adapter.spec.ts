@@ -11,4 +11,11 @@ describe("/src/validation", () => {
         const response = sut.addValidate(articleData.validData.body)
         expect(response).toBeUndefined()
     })
+    test("should return title required", () => {
+        const sut = makeSut()
+        const response = sut.addValidate(articleData.withoutTitle.body)
+        console.log(response);
+
+        expect(response).toEqual({ title: ["Required"] })
+    })
 })
