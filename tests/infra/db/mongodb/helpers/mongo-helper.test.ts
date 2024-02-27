@@ -1,4 +1,4 @@
-import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper";
+import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper"
 import "dotenv/config";
 describe("./src/infra/db/mongodb/add-article-repositore", () => {
   beforeAll(async () => {

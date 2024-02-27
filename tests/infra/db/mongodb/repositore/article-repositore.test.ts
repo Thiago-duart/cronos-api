@@ -1,5 +1,5 @@
 
-import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper";
+import { mongoHelper } from "@/infra/db/mongodb/helpers/mongo-helper"
 import { articleData } from "../../../../mocks/article-data";
 import "dotenv/config";
 import { MongoArticleRepositore } from "@/infra/db/mongodb/article-repositore/article.repositore";

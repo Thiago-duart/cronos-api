@@ -1,5 +1,4 @@
 import { IArticle } from "@/domain/models/article";
-import { any } from "zod";
 export interface IArticleRequest {
   title: string;
   img: string;
