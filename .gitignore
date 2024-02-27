@@ -1,4 +1,9 @@
 node_modules
 coverage
 dist
+*.js
+*.js.map
+!babel.config.js
+!commitlint.config.js
+!jest-mongodb.config.js
 .env
