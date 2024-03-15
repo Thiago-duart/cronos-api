@@ -7,3 +7,5 @@ dist
 !commitlint.config.js
 !jest-mongodb.config.js
 .env
+cronos-api
+.pnpm-store

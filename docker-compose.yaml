@@ -1,0 +1,15 @@
+services:
+  cronos:
+    build: .
+    container_name: cronos
+    entrypoint: ./.docker/start.sh
+    volumes:
+      - .:/home/node/api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: always
