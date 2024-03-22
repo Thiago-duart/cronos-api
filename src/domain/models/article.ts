@@ -3,4 +3,5 @@ export interface IArticle {
   img: string;
   title: string;
   article: string;
+  createdAt: Date
 }
