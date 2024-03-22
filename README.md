@@ -124,3 +124,8 @@ teste integração -->
 ```http
   DELETE /api/article/:id
 ```
+
+
+## Aprendizados
+
+Aprendi sobre arquitetura limpa, como criar um projeto escalável com uma boa arquitetura. Aprendi sobre design patterns e apliquei os princípios do SOLID. Também aprendi mais sobre testes unitários e de integração. Estava utilizando TDD, que consiste em escrever o teste antes de escrever o código de produção e fazer o mínimo para que o código passe no teste, evoluindo gradualmente. Além disso, aprendi sobre Docker e Docker Compose
