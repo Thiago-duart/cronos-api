@@ -8,6 +8,8 @@ pnpm
 
 pnpm install --only=production
 
+pnpm run build
+
 pnpm start
 
 tail -f /dev/null
