@@ -22,11 +22,13 @@ describe("article", () => {
                 res.body.img = "valid-img"
                 res.body.title = "valid-title"
                 res.body.article = "valid-article"
+                res.body.createdAt =  "valid-date" 
             }).expect(201, {
                 id: "valid-id",
                 img: "valid-img",
                 title: "valid-title",
-                article: "valid-article"
+                article: "valid-article",
+                createdAt: "valid-date" 
             },)
     });
     test("should return 400 and message error title required -- post/api/article", async () => {
@@ -93,11 +95,19 @@ describe("article", () => {
         await request(app)
             .patch(`/api/article/${id}`)
             .send({ title: "update" })
+            .expect(function (res) {
+                res.body.id = "valid-id"
+                res.body.img = "valid-img"
+                res.body.title = "update"
+                res.body.article = "valid-article"
+                res.body.createdAt =  "valid-date" 
+            })
             .expect(200, {
-                id,
+                id: "valid-id",
                 img: 'valid-img',
                 title: 'update',
-                article: 'valid-article'
+                article: 'valid-article',
+                createdAt:  "valid-date" 
             })
     });
     test("should return 204 no content when delete -- delete/api/article/:id", async () => {
